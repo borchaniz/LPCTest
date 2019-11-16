@@ -9,7 +9,13 @@
 
     </data>
 
-    <!-- TODO -->
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_height="128dp"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp">
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </layout>
