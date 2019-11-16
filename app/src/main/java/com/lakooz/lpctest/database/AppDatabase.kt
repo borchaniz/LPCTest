@@ -1,13 +1,17 @@
 package com.lakooz.lpctest.database
 
 import android.content.Context
+import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
+import com.lakooz.lpctest.model.Pot
 
-// TODO
+@Database(entities = [Pot::class], version = 1)
+@TypeConverters(DateConverter::class)
 abstract class AppDatabase : RoomDatabase() {
 
-    //TODO
+    abstract fun potDao(): PotDao
 
     companion object {
 

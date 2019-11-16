@@ -5,7 +5,8 @@ import androidx.room.Entity
 @Entity
 data class Pot(
     val identifier: String,
-    val name: String
+    val name: String,
+    val category: Int
     // TODO : add missing fields
 ) {
 

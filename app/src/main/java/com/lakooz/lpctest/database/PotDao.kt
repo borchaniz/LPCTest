@@ -1,17 +1,22 @@
 package com.lakooz.lpctest.database
 
 import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
 import com.lakooz.lpctest.model.Pot
 
 
 @Dao
 abstract class PotDao {
 
-    //TODO
-    fun createOrUpdate(pot: Pot) {
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    abstract fun createOrUpdate(pot: Pot)
 
-    }
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    abstract fun insertAllAndSynchronize(pots: List<Pot>)
 
-    // TODO : add missing methods
+    @Query("select * from pot where category = :category")
+    abstract fun getPots(category: Int)
 
 }
