@@ -2,14 +2,20 @@ package com.lakooz.lpctest.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.google.gson.annotations.SerializedName
+import java.util.*
 
 @Entity
 data class Pot(
     @PrimaryKey
+    @SerializedName("id")
     val identifier: String,
     val name: String,
-    val category: Int
-    // TODO : add missing fields
+    val creationDate: Date,
+    val category: Int,
+    val contributorsCount: Int,
+    val amount: Float,
+    val imageUrl: String
 ) {
 
 
