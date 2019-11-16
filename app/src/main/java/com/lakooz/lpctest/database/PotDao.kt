@@ -17,6 +17,6 @@ abstract class PotDao {
     abstract fun insertAllAndSynchronize(pots: List<Pot>)
 
     @Query("select * from pot where category = :category")
-    abstract fun getPots(category: Int)
+    abstract fun getPots(category: Int):List<Pot>
 
 }
