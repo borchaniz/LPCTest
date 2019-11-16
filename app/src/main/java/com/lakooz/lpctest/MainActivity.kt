@@ -19,14 +19,22 @@ class MainActivity : AppCompatActivity() {
 
         TabLayoutMediator(tabLayout, viewPager,
             TabLayoutMediator.TabConfigurationStrategy { tab, position ->
-                // TODO : set tabs titles
+                tab.text = when (position) {
+                    0 -> "Anniversaire"
+                    1 -> "Départ"
+                    2 -> "Solidaire"
+                    else -> ""
+                }
             }).attach()
 
 
-       swipeRefreshLayout.setProgressViewOffset(true, START_SWIPE_REFRESH, resources.getDimension(R.dimen.swipe_refresh_offset).toInt())
+        swipeRefreshLayout.setProgressViewOffset(
+            true,
+            START_SWIPE_REFRESH,
+            resources.getDimension(R.dimen.swipe_refresh_offset).toInt()
+        )
 
         // TODO : set up view model
-
 
 
         swipeRefreshLayout.setOnRefreshListener {
