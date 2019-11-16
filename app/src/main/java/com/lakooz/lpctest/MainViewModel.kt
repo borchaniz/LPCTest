@@ -1,6 +1,7 @@
 package com.lakooz.lpctest
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -11,6 +12,10 @@ import io.reactivex.SingleObserver
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
+import android.icu.lang.UCharacter.GraphemeClusterBreak.T
+import java.io.PrintWriter
+import java.io.StringWriter
+
 
 class MainViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -41,6 +46,11 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
                 override fun onError(e: Throwable) {
                     _isRefreshing.value = false
+                    val sw = StringWriter()
+                    val pw = PrintWriter(sw)
+                    e.printStackTrace(pw)
+                    Log.d("..............;","$sw")
+
                 }
 
             }

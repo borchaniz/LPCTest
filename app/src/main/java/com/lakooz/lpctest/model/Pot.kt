@@ -15,7 +15,7 @@ data class Pot(
     val category: Int,
     val contributorsCount: Int,
     val amount: Float,
-    val imageUrl: String
+    val imageUrl: String?
 ) {
 
 
