@@ -1,6 +1,7 @@
 package com.lakooz.lpctest.database
 
 import android.content.Context
+import androidx.room.Room
 import androidx.room.RoomDatabase
 
 // TODO
@@ -14,10 +15,12 @@ abstract class AppDatabase : RoomDatabase() {
         private var instance: AppDatabase? = null
 
 
-        // TODO : implement
-        fun buildDatabase(context: Context) : AppDatabase {
-
-        }
+        fun buildDatabase(context: Context): AppDatabase =
+            Room.databaseBuilder(
+                context.applicationContext,
+                AppDatabase::class.java,
+                "LPCTestDB"
+            ).build()
 
         fun getInstance(context: Context): AppDatabase {
             if (instance == null) {
