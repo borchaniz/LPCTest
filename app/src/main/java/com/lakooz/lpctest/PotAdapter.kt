@@ -20,7 +20,6 @@ class PotAdapter(private val context: Context, private var emptyView: View? = nu
     fun setPots(pots: List<Pot>?) {
         this.pots = pots
         notifyDataSetChanged()
-        // TODO : notify data change and handle empty view
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -29,9 +28,7 @@ class PotAdapter(private val context: Context, private var emptyView: View? = nu
         return ViewHolder(binding)
     }
 
-    override fun getItemCount(): Int {
-        return 5
-    }
+    override fun getItemCount() = if (pots != null) pots!!.size else 0
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 

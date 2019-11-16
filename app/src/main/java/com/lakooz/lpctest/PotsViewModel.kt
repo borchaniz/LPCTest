@@ -6,11 +6,11 @@ import androidx.lifecycle.ViewModel
 import com.lakooz.lpctest.model.Pot
 import com.lakooz.lpctest.repositories.PotRepository
 
-class PotsViewModel() : ViewModel() {
+class PotsViewModel : ViewModel() {
 
     private val repository = PotRepository.instance
 
-    // TODO : initialize
+    //  TODO : initialize
     val pots : LiveData<List<Pot>> = MutableLiveData<List<Pot>>()
 
 

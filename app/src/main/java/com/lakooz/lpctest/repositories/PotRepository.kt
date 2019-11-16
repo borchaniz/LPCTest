@@ -5,6 +5,7 @@ import com.lakooz.lpctest.MyApplication
 import com.lakooz.lpctest.database.AppDatabase
 import com.lakooz.lpctest.database.PotDao
 import com.lakooz.lpctest.model.Pot
+import kotlin.concurrent.thread
 
 class PotRepository(private val potDao: PotDao) {
 
@@ -13,7 +14,9 @@ class PotRepository(private val potDao: PotDao) {
     }
 
     fun insertAllAndSynchronize(pots: List<Pot>) {
-        potDao.insertAllAndSynchronize(pots)
+        thread {
+            potDao.insertAllAndSynchronize(pots)
+        }
     }
 
     fun getPots(category: Int) = potDao.getPots(category)

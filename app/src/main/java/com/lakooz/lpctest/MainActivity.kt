@@ -1,17 +1,20 @@
 package com.lakooz.lpctest
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.activity_main.*
 
+
 class MainActivity : AppCompatActivity() {
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
 
         viewPager.adapter = ViewPagerAdapter(supportFragmentManager, lifecycle)
 
@@ -34,11 +37,14 @@ class MainActivity : AppCompatActivity() {
             resources.getDimension(R.dimen.swipe_refresh_offset).toInt()
         )
 
-        // TODO : set up view model
+        val viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
+        viewModel.isRefreshing.observe(this, Observer {
+            swipeRefreshLayout.isRefreshing = it
+        })
 
 
         swipeRefreshLayout.setOnRefreshListener {
-            // TODO
+            viewModel.getPots()
         }
 
         viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
@@ -49,7 +55,7 @@ class MainActivity : AppCompatActivity() {
         })
 
         fab.setOnClickListener {
-            // TODO
+            viewModel.createPot(viewPager.currentItem)
         }
     }
 

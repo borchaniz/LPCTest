@@ -20,7 +20,6 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     val isRefreshing: LiveData<Boolean>
         get() = _isRefreshing
 
-
     fun getPots() {
 
         RestApiClient.getPots()
@@ -36,12 +35,12 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
                 override fun onSuccess(pots: List<Pot>) {
                     disposable?.dispose()
-                    // TODO
-
+                    repository.insertAllAndSynchronize(pots)
+                    _isRefreshing.value = false
                 }
 
                 override fun onError(e: Throwable) {
-                    // TODO
+                    _isRefreshing.value = false
                 }
 
             }
@@ -64,7 +63,8 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
                 override fun onSuccess(pot: Pot) {
                     disposable?.dispose()
-                    //TODO
+                    repository.createOrUpdate(pot)
+
                 }
 
                 override fun onError(e: Throwable) {

@@ -9,7 +9,7 @@ import retrofit2.http.GET
 import retrofit2.http.POST
 
 interface EndPoints {
-    @GET("/get-pots")
+    @GET("get-pots")
     fun getPots(): Single<List<Pot>>
 
     @POST("create-pot")
