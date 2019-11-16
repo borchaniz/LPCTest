@@ -9,16 +9,17 @@ import com.lakooz.lpctest.model.Pot
 import android.view.LayoutInflater
 
 
-
-class PotAdapter(private val context: Context, private var emptyView: View? = null) : RecyclerView.Adapter<PotAdapter.ViewHolder>() {
+class PotAdapter(private val context: Context, private var emptyView: View? = null) :
+    RecyclerView.Adapter<PotAdapter.ViewHolder>() {
 
 
     private var pots: List<Pot>? = null
-    private var recyclerView: RecyclerView?= null
+    private var recyclerView: RecyclerView? = null
 
 
     fun setPots(pots: List<Pot>?) {
-            this.pots = pots
+        this.pots = pots
+        notifyDataSetChanged()
         // TODO : notify data change and handle empty view
     }
 
