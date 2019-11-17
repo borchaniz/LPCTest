@@ -1,6 +1,7 @@
 package com.lakooz.lpctest
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -59,10 +60,11 @@ class MainActivity : AppCompatActivity() {
             viewModel.createPot(viewPager.currentItem, this)
         }
 
-        viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback(){
+        viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
-                (viewPager.adapter as ViewPagerAdapter).fragments[viewPager.currentItem].refresh()
+                if ((viewPager.adapter as ViewPagerAdapter).fragments.size > viewPager.currentItem)
+                    (viewPager.adapter as ViewPagerAdapter).fragments[viewPager.currentItem].refresh()
             }
         })
     }
