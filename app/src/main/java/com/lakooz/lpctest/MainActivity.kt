@@ -45,6 +45,7 @@ class MainActivity : AppCompatActivity() {
 
         swipeRefreshLayout.setOnRefreshListener {
             viewModel.getPots()
+            (viewPager.adapter as ViewPagerAdapter).fragments[viewPager.currentItem].viewModel.refresh(viewPager.currentItem)
         }
 
         viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
@@ -57,6 +58,13 @@ class MainActivity : AppCompatActivity() {
         fab.setOnClickListener {
             viewModel.createPot(viewPager.currentItem)
         }
+
+        viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback(){
+            override fun onPageSelected(position: Int) {
+                super.onPageSelected(position)
+                (viewPager.adapter as ViewPagerAdapter).fragments[viewPager.currentItem].refresh()
+            }
+        })
     }
 
     companion object {

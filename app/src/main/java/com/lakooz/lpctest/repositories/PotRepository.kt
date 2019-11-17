@@ -1,6 +1,5 @@
 package com.lakooz.lpctest.repositories
 
-import android.app.Application
 import com.lakooz.lpctest.MyApplication
 import com.lakooz.lpctest.database.AppDatabase
 import com.lakooz.lpctest.database.PotDao
@@ -10,7 +9,9 @@ import kotlin.concurrent.thread
 class PotRepository(private val potDao: PotDao) {
 
     fun createOrUpdate(pot: Pot) {
-        potDao.createOrUpdate(pot)
+        thread {
+            potDao.createOrUpdate(pot)
+        }
     }
 
     fun insertAllAndSynchronize(pots: List<Pot>) {
@@ -19,7 +20,14 @@ class PotRepository(private val potDao: PotDao) {
         }
     }
 
-    fun getPots(category: Int) = potDao.getPots(category)
+    fun getPots(category: Int): List<Pot> {
+        var pots = listOf<Pot>()
+        thread {
+            pots = potDao.getPots(category)
+
+        }.join()
+        return pots
+    }
 
     companion object {
         val instance: PotRepository =

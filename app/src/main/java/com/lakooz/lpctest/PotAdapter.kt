@@ -31,21 +31,23 @@ class PotAdapter(private val context: Context, private var emptyView: View? = nu
     override fun getItemCount() = if (pots != null) pots!!.size else 0
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-
+        holder.bind(pots!![position])
 
     }
 
     override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
         super.onAttachedToRecyclerView(recyclerView)
-
         this.recyclerView = recyclerView
     }
 
     override fun onDetachedFromRecyclerView(recyclerView: RecyclerView) {
         this.recyclerView = null
-
         super.onDetachedFromRecyclerView(recyclerView)
     }
 
-    inner class ViewHolder(val binding: PotItemBinding) : RecyclerView.ViewHolder(binding.root)
+    inner class ViewHolder(val binding: PotItemBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(item: Pot) {
+            binding.pot = item
+        }
+    }
 }
