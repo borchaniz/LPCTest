@@ -77,6 +77,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                 override fun onSuccess(pot: Pot) {
                     disposable?.dispose()
                     repository.createOrUpdate(pot)
+                    (context.viewPager.adapter as ViewPagerAdapter).fragments[context.viewPager.currentItem].refresh()
                     Snackbar.make(
                         context.root,
                         "Pot créé avec succès",

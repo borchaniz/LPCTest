@@ -47,7 +47,8 @@
                 android:textSize="24sp"
                 app:layout_constraintBottom_toBottomOf="@+id/img_pot"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/img_pot" />
+                app:layout_constraintStart_toStartOf="@+id/img_pot"
+                tools:text="Nom du pot" />
 
             <TextView
                 android:id="@+id/amount_pot"
@@ -67,7 +68,7 @@
                 app:layout_constraintEnd_toStartOf="@+id/imageView2"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/img_pot"
-                />
+                tools:text="5 € récoltés" />
 
             <TextView
                 android:id="@+id/contributors_pot"
@@ -79,7 +80,8 @@
                 android:text="@{`` + pot.contributorsCount}"
                 android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/img_pot" />
+                app:layout_constraintTop_toBottomOf="@+id/img_pot"
+                tools:text="50" />
 
             <ImageView
                 android:id="@+id/imageView2"

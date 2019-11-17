@@ -4,8 +4,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.lakooz.lpctest.model.Pot
 import com.lakooz.lpctest.repositories.PotRepository
+import java.io.Serializable
 
-class PotsViewModel : ViewModel() {
+class PotsViewModel : ViewModel(), Serializable {
 
     private val repository = PotRepository.instance
     var category = 0

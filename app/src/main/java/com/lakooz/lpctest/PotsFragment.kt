@@ -1,8 +1,6 @@
 package com.lakooz.lpctest
 
-import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -29,6 +27,7 @@ class PotsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         super.onCreateView(inflater, container, savedInstanceState)
+        viewModel = ViewModelProviders.of(this).get(PotsViewModel::class.java)
 
         val binding = PotsFragmentBinding.inflate(inflater, container, false)
         return binding.root
@@ -39,7 +38,6 @@ class PotsFragment : Fragment() {
         recycler_view.adapter = PotAdapter(context!!, list_empty_layout)
         recycler_view.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-        viewModel = ViewModelProviders.of(this).get(PotsViewModel::class.java)
         viewModel!!.category = (activity as MainActivity).viewPager.currentItem
         viewModel!!.pots.observe(this, Observer {
             (recycler_view.adapter as PotAdapter).setPots(it)
