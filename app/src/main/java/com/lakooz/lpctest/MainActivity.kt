@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.viewpager2.widget.ViewPager2
+import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -15,7 +16,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
         viewPager.adapter = ViewPagerAdapter(supportFragmentManager, lifecycle)
 
         setSupportActionBar(toolbar)
@@ -56,7 +56,7 @@ class MainActivity : AppCompatActivity() {
         })
 
         fab.setOnClickListener {
-            viewModel.createPot(viewPager.currentItem)
+            viewModel.createPot(viewPager.currentItem, this)
         }
 
         viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback(){
