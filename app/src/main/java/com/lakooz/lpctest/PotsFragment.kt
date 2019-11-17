@@ -35,15 +35,17 @@ class PotsFragment : Fragment() {
         recycler_view.adapter = PotAdapter(context!!, list_empty_layout)
         recycler_view.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-    }
-
-    fun refresh() {
         viewModel = ViewModelProviders.of(this).get(PotsViewModel::class.java)
         viewModel.category = (activity as MainActivity).viewPager.currentItem
         viewModel.pots.observe(this, Observer {
             (recycler_view.adapter as PotAdapter).setPots(it)
+            list_empty_layout.visibility = if (it.isNullOrEmpty()) View.VISIBLE else View.GONE
         })
+    }
+
+    fun refresh() {
+
         viewModel.refresh((activity as MainActivity).viewPager.currentItem)
-        Log.d("............","${viewModel.pots.value}")
+        Log.d("............", "${viewModel.pots.value}")
     }
 }

@@ -44,8 +44,8 @@ class MainActivity : AppCompatActivity() {
 
 
         swipeRefreshLayout.setOnRefreshListener {
-            viewModel.getPots()
-            (viewPager.adapter as ViewPagerAdapter).fragments[viewPager.currentItem].viewModel.refresh(viewPager.currentItem)
+            viewModel.getPots(this)
+
         }
 
         viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {

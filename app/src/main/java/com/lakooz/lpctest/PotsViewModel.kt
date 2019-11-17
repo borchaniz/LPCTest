@@ -1,6 +1,5 @@
 package com.lakooz.lpctest
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.lakooz.lpctest.model.Pot
@@ -10,7 +9,7 @@ class PotsViewModel : ViewModel() {
 
     private val repository = PotRepository.instance
     var category = 0
-    val pots: MutableLiveData<List<Pot>> = MutableLiveData<List<Pot>>()
+    val pots: MutableLiveData<List<Pot>> = MutableLiveData()
 
     fun refresh(category: Int) {
         pots.value = repository.getPots(category)

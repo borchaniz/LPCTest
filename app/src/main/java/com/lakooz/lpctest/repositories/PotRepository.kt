@@ -17,7 +17,7 @@ class PotRepository(private val potDao: PotDao) {
     fun insertAllAndSynchronize(pots: List<Pot>) {
         thread {
             potDao.insertAllAndSynchronize(pots)
-        }
+        }.join()
     }
 
     fun getPots(category: Int): List<Pot> {

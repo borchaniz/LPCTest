@@ -13,6 +13,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import android.icu.lang.UCharacter.GraphemeClusterBreak.T
+import kotlinx.android.synthetic.main.activity_main.*
 import java.io.PrintWriter
 import java.io.StringWriter
 
@@ -25,7 +26,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     val isRefreshing: LiveData<Boolean>
         get() = _isRefreshing
 
-    fun getPots() {
+    fun getPots(context: MainActivity) {
 
         RestApiClient.getPots()
             .subscribeOn(Schedulers.io())
@@ -42,6 +43,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                     disposable?.dispose()
                     repository.insertAllAndSynchronize(pots)
                     _isRefreshing.value = false
+                    (context.viewPager.adapter as ViewPagerAdapter).fragments[context.viewPager.currentItem].viewModel.refresh(context.viewPager.currentItem)
                 }
 
                 override fun onError(e: Throwable) {
@@ -49,7 +51,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                     val sw = StringWriter()
                     val pw = PrintWriter(sw)
                     e.printStackTrace(pw)
-                    Log.d("..............;","$sw")
+                    Log.d("..............;", "$sw")
 
                 }
 

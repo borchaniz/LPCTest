@@ -19,7 +19,6 @@ fun setImageUrl(imageView: ImageView, url: String?) {
             override fun onError(e: Exception?) {
                 imageView.setImageResource(R.drawable.ic_launcher_background)
             }
-
         })
     }
 }
