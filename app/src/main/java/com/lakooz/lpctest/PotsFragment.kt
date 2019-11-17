@@ -16,7 +16,12 @@ import kotlinx.android.synthetic.main.pots_fragment.*
 
 class PotsFragment : Fragment() {
 
-    lateinit var viewModel: PotsViewModel
+    var viewModel: PotsViewModel? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        retainInstance = true
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -26,7 +31,6 @@ class PotsFragment : Fragment() {
         super.onCreateView(inflater, container, savedInstanceState)
 
         val binding = PotsFragmentBinding.inflate(inflater, container, false)
-
         return binding.root
     }
 
@@ -36,16 +40,14 @@ class PotsFragment : Fragment() {
         recycler_view.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         viewModel = ViewModelProviders.of(this).get(PotsViewModel::class.java)
-        viewModel.category = (activity as MainActivity).viewPager.currentItem
-        viewModel.pots.observe(this, Observer {
+        viewModel!!.category = (activity as MainActivity).viewPager.currentItem
+        viewModel!!.pots.observe(this, Observer {
             (recycler_view.adapter as PotAdapter).setPots(it)
             list_empty_layout.visibility = if (it.isNullOrEmpty()) View.VISIBLE else View.GONE
         })
     }
 
     fun refresh() {
-
-        viewModel.refresh((activity as MainActivity).viewPager.currentItem)
-        Log.d("............", "${viewModel.pots.value}")
+        viewModel!!.refresh((activity as MainActivity).viewPager.currentItem)
     }
 }

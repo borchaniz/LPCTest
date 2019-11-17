@@ -40,9 +40,10 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                     disposable?.dispose()
                     repository.insertAllAndSynchronize(pots)
                     _isRefreshing.value = false
-                    (context.viewPager.adapter as ViewPagerAdapter).fragments[context.viewPager.currentItem].viewModel.refresh(
-                        context.viewPager.currentItem
-                    )
+                    if ((context.viewPager.adapter as ViewPagerAdapter).fragments.size > 0)
+                        (context.viewPager.adapter as ViewPagerAdapter).fragments[context.viewPager.currentItem].viewModel!!.refresh(
+                            context.viewPager.currentItem
+                        )
                 }
 
                 override fun onError(e: Throwable) {
